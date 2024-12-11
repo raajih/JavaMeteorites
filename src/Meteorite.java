@@ -208,9 +208,12 @@ public class Meteorite {
     {
         String result;
 
+        // Check if geolocation is null before calling toString()
+        String geoString = (geolocation != null) ? geolocation.toString() : "No geolocation data"; //AT LEAST ONE OBJECT IN JSON FILE DOESN'T HAVE GEOLOCATION
+
         result = "Meteorite [name=" + name + ", id=" + id + ", nametype=" + nametype + ", recclass=" 
         + recclass + ", mass=" + mass + ", fall=" + fall + ", year="
-        + year + ", reclat=" + reclat + ", reclong=" + reclong + ", geolocation=" + geolocation.toString()
+        + year + ", reclat=" + reclat + ", reclong=" + reclong + ", geolocation=" + geoString
         + "]";
 
         return result;

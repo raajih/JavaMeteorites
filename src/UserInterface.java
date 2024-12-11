@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 
 public class UserInterface {
+    private Meteorite[] meteorites = {};
     public static void main(String[] args) {
         
         double[] coord = {1.52105, 2.56451};
@@ -43,6 +44,8 @@ public class UserInterface {
             choice = scnr.nextInt();
             scnr.nextLine();
 
+
+            
             switch (choice)
             {
                 case 0:
@@ -78,7 +81,7 @@ public class UserInterface {
                         String jsonString = Files.readString(filePath); //Read in json file as one string.
 
                         //Turn string into array of Meteorites.
-                        Meteorite[] meteorites = gson.fromJson(jsonString, Meteorite[].class);
+                        meteorites = gson.fromJson(jsonString, Meteorite[].class);
 
                         //Output number of elements in array.
                         System.out.println("\n" + meteorites.length + " records processed.");
@@ -90,7 +93,17 @@ public class UserInterface {
                     
                     break;
                 case 2:
-                    System.out.println("you picked choice 2");
+                    if (meteorites.length == 0)
+                    {
+                        System.out.println("There is no meteorite data saved. Please import data from a json file.");
+                    }
+                    else 
+                    {
+                        for (Meteorite x: meteorites)
+                        {
+                            System.out.println(x.toString());
+                        }
+                    }
                     break;
                 case 3:
                     System.out.println("choice 3");
