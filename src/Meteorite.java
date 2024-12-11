@@ -1,24 +1,24 @@
 //Raajih Roland
 //Final Project
 
-import java.time.LocalDateTime;
+
 
 public class Meteorite {
     private String name;
-    private int id;
+    private String id;
     private String nametype;
     private String recclass;
-    private double mass;
+    private String mass;
     private String fall;
-    private LocalDateTime year;
-    private double reclat;
-    private double reclong;
+    private String year;
+    private String reclat;
+    private String reclong;
     private Geolocation geolocation;
 
     /**
      * Constructs a Meteorite object.
      * @param name name of Meteorite as String.
-     * @param id id of Meteorite as int.
+     * @param id id of Meteorite as String.
      * @param nametype nametype as String.
      * @param recclass recclass as String.
      * @param mass mass of Meteorite as double.
@@ -28,8 +28,8 @@ public class Meteorite {
      * @param reclong reclong as double.
      * @param geolocation geolocation as Geolocation object.
      */
-    public Meteorite (String name, int id, String nametype, String recclass, double mass, String fall, LocalDateTime year, double reclat,
-    double reclong, Geolocation geolocation)
+    public Meteorite (String name, String id, String nametype, String recclass, String mass, String fall, String year, String reclat,
+    String reclong, Geolocation geolocation)
     {
         this.name = name;
         this.id = id;
@@ -61,17 +61,17 @@ public class Meteorite {
 
     /**
      * Getter for id.
-     * @return id as int.
+     * @return id as String.
      */
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
     /**
      * Sets id.
-     * @param id int to be set as id.
+     * @param id String to be set as id.
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -109,17 +109,17 @@ public class Meteorite {
 
     /**
      * Getter for mass.
-     * @return mass as double.
+     * @return mass as String.
      */
-    public double getMass() {
+    public String getMass() {
         return this.mass;
     }
 
     /**
      * Set mass.
-     * @param mass double to be set as mass.
+     * @param mass String to be set as mass.
      */
-    public void setMass(double mass) {
+    public void setMass(String mass) {
         this.mass = mass;
     }
 
@@ -141,49 +141,49 @@ public class Meteorite {
 
     /**
      * Getter for year.
-     * @return year as LocalDate object.
+     * @return year as String object.
      */
-    public LocalDateTime getYear() {
+    public String getYear() {
         return this.year;
     }
 
     /**
      * Set year.
-     * @param year LocalDate object to be set as year.
+     * @param year String object to be set as year.
      */
-    public void setYear(LocalDateTime year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
     /**
      * Getter for reclat.
-     * @return reclat as double.
+     * @return reclat as String.
      */
-    public double getReclat() {
+    public String getReclat() {
         return this.reclat;
     }
 
     /**
      * Set reclat.
-     * @param reclat double to be set as reclat.
+     * @param reclat String to be set as reclat.
      */
-    public void setReclat(double reclat) {
+    public void setReclat(String reclat) {
         this.reclat = reclat;
     }
 
     /**
      * Getter for reclong.
-     * @return reclong as double.
+     * @return reclong as String.
      */
-    public double getReclong() {
+    public String getReclong() {
         return this.reclong;
     }
 
     /**
      * Set reclong.
-     * @param reclong double to be set as reclong.
+     * @param reclong String to be set as reclong.
      */
-    public void setReclong(double reclong) {
+    public void setReclong(String reclong) {
         this.reclong = reclong;
     }
 
@@ -224,7 +224,7 @@ public class Meteorite {
     {
         String result;
 
-        result = "name = " + name + ", id = " + id + ", recclass = " + recclass + ", mass = " + mass + ", year = " + year.getYear();
+        result = "name = " + name + ", id = " + id + ", recclass = " + recclass + ", mass = " + mass + ", year = " + year.substring(0, 4);
         return result;
     }
 

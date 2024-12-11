@@ -1,16 +1,20 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;   
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import com.google.gson.Gson;
 
 public class UserInterface {
     public static void main(String[] args) {
-        double[] coord = {2.332, 4.666};
-
+        
+        double[] coord = {1.52105, 2.56451};
         Geolocation test = new Geolocation("Point", coord);
 
-        LocalDateTime testDate = LocalDateTime.now();
 
-        Meteorite testMeteor = new Meteorite("Hailey's", 1, "nametype", "recclass", 5.2, "fell", testDate, 5.220000, 6.220000, test);
-
+        Meteorite testMeteor = new Meteorite("Hailey's", "1", "nametype", "recclass", "5.2", "fell", "1880-01-01T00", "5.220000", "6.220000", test);
+        
 
         UserInterface ui = new UserInterface();
         ui.go();
@@ -45,6 +49,45 @@ public class UserInterface {
                     break; //Prevents an error message from printing when user chooses 0.
                 case 1:
                     System.out.print("Enter the JSON file name or press <Enter> to accept the default (data/NASA_Meteorite.json): ");
+                    String filename = scnr.nextLine(); //Get filename from user.
+                    Gson gson = new Gson(); //Gson object
+
+                    if (filename.isEmpty()) 
+                    {
+                        filename = "data/NASA_Meteorite.json"; // Use default if user presses Enter
+                    }
+
+                    try {
+                        Path filePath = Paths.get(filename);
+
+                        // Check if the file exists
+                        if (!Files.exists(filePath)) 
+                        {
+                            // If the file doesn't exist, create it
+                            System.out.println("File not found. Creating new file: " + filename);
+                            Files.createFile(filePath);  // Creates an empty file
+                        }
+
+                        // Check if the file is empty before attempting to read it
+                        if (Files.size(filePath) == 0) 
+                        {
+                            System.out.println("The file is empty. No data to process.");
+                            return;  // Exit the method if the file is empty
+                        }
+
+                        String jsonString = Files.readString(filePath); //Read in json file as one string.
+
+                        //Turn string into array of Meteorites.
+                        Meteorite[] meteorites = gson.fromJson(jsonString, Meteorite[].class);
+
+                        //Output number of elements in array.
+                        System.out.println("\n" + meteorites.length + " records processed.");
+                    } catch (IOException e)
+                    {
+                        System.out.println("Error reading file");
+                    }
+
+                    
                     break;
                 case 2:
                     System.out.println("you picked choice 2");
