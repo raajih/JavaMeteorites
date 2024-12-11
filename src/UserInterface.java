@@ -144,11 +144,51 @@ public class UserInterface {
                     }
 
                     break;
-                case 5:
-                    System.out.println("choice 5");
+                case 5: //Find a specific meteorite by id.
+                    System.out.print("Enter the ID of the meteorite: ");
+                    findMeteorite = scnr.nextLine();
+
+                    Stream<Meteorite> stream = Stream.of(meteorites);
+                    Meteorite found = stream
+                        .filter(w -> w.getId().equals(findMeteorite))
+                        .findFirst()
+                        .orElse(null);
+
+                        if (found == null)
+                        {
+                            System.out.println("No meteorite with that id found.");
+                        }
+                        else 
+                        {
+                            System.out.println(found.display()); //Output info for meteorite.
+                        }
                     break;
-                case 6:
-                    System.out.println("choice 6");
+                case 6: //Display largest meteorites.
+                    System.out.print("Enter the number of largest meteorites to display: ");
+                    int numLargest = scnr.nextInt();
+                    scnr.nextLine();
+
+                    if (meteorites.length == 0) //If there is no meteorite objects in array.
+                    System.out.println("No meteorite data loaded. Please add data from file.");
+                    else 
+                    {
+                        //Create list of the largest meteorites.
+                        List<Meteorite> largestMeteorites = Stream.of(meteorites)
+                            .sorted((m1, m2) -> {
+                                // Get the mass of each meteorite, default to 0.0 if mass is null
+                                double mass1 = (m1.getMass() != null) ? Double.parseDouble(m1.getMass()) : 0.0; //Helps prevent NullPointerException.
+                                double mass2 = (m2.getMass() != null) ? Double.parseDouble(m2.getMass()) : 0.0;
+                                return Double.compare(mass2, mass1); // Compare in descending order
+                            })
+                            .limit(numLargest)
+                            .collect(Collectors.toList());
+
+                        System.out.println("Largest " + numLargest + " meteorites:");
+                        for (Meteorite meteorite: largestMeteorites)
+                        {
+                            System.out.println(meteorite.display()); //Output largest meteorites.
+                        }
+                    }
                     break;
                 case 7:
                     System.out.println("choice 7");
