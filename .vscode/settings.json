@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\raaji\\Downloads\\_temp_matlab_R2019b_win64\\java\\jarext\\gson.jar"
+    ]
+}
