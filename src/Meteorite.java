@@ -1,7 +1,7 @@
 //Raajih Roland
 //Final Project
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Meteorite {
     private String name;
@@ -10,7 +10,7 @@ public class Meteorite {
     private String recclass;
     private double mass;
     private String fall;
-    private LocalDate year;
+    private LocalDateTime year;
     private double reclat;
     private double reclong;
     private Geolocation geolocation;
@@ -28,7 +28,7 @@ public class Meteorite {
      * @param reclong reclong as double.
      * @param geolocation geolocation as Geolocation object.
      */
-    public Meteorite (String name, int id, String nametype, String recclass, double mass, String fall, LocalDate year, double reclat,
+    public Meteorite (String name, int id, String nametype, String recclass, double mass, String fall, LocalDateTime year, double reclat,
     double reclong, Geolocation geolocation)
     {
         this.name = name;
@@ -143,7 +143,7 @@ public class Meteorite {
      * Getter for year.
      * @return year as LocalDate object.
      */
-    public LocalDate getYear() {
+    public LocalDateTime getYear() {
         return this.year;
     }
 
@@ -151,7 +151,7 @@ public class Meteorite {
      * Set year.
      * @param year LocalDate object to be set as year.
      */
-    public void setYear(LocalDate year) {
+    public void setYear(LocalDateTime year) {
         this.year = year;
     }
 
@@ -201,6 +201,31 @@ public class Meteorite {
      */
     public void setGeolocation(Geolocation geolocation) {
         this.geolocation = geolocation;
+    }
+
+    @Override
+    public String toString()
+    {
+        String result;
+
+        result = "Meteorite [name=" + name + ", id=" + id + ", nametype=" + nametype + ", recclass=" 
+        + recclass + ", mass=" + mass + ", fall=" + fall + ", year="
+        + year + ", reclat=" + reclat + ", reclong=" + reclong + ", geolocation=" + geolocation.toString()
+        + "]";
+
+        return result;
+    }
+
+    /**
+     * Outputs name, id, recclass, and year.
+     * @return string object holding name, id, recclass, and year.
+     */
+    public String display()
+    {
+        String result;
+
+        result = "name = " + name + ", id = " + id + ", recclass = " + recclass + ", mass = " + mass + ", year = " + year.getYear();
+        return result;
     }
 
 }

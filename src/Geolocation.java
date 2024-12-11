@@ -1,5 +1,6 @@
 //Raajih Roland
 //Final Project
+import java.util.Arrays;
 
 public class Geolocation {
     private String type;
@@ -48,5 +49,16 @@ public class Geolocation {
         this.coordinates = coordinates;
     }
 
-    
+    @Override
+    public String toString()
+    {
+        String result;
+
+
+
+        result = "Geolocation [type=" + type + ", coordinates=" + Arrays.toString(coordinates) + "]";
+
+        return result;
+    }
+
 }
