@@ -7,6 +7,9 @@ import java.util.Scanner;
 import com.google.gson.Gson;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserInterface {
     private Meteorite[] meteorites = {};
@@ -54,7 +57,7 @@ public class UserInterface {
                     break; //Prevents an error message from printing when user chooses 0.
                 case 1:
                     System.out.print("Enter the JSON file name or press <Enter> to accept the default (data/NASA_Meteorite.json): ");
-                    String filename = scnr.nextLine(); //Get filename from user.
+                    String filename = scnr.nextLine().trim(); //Get filename from user.
                     Gson gson = new Gson(); //Gson object
 
                     if (filename.isEmpty()) 
@@ -120,8 +123,26 @@ public class UserInterface {
                     System.out.println("Error writing to binary file");
                 }
                     break;
-                case 4:
-                    System.out.println("choice 4");
+                case 4: //Find a specific meteorite by name.
+                    System.out.print("Enter the name of the meteorite: ");
+                    String findMeteorite = scnr.nextLine(); //Get user's input for name.
+
+                    //Find the first match, if no match found then Meteorite is set to null.
+                    Stream<Meteorite> meteoriteStream = Stream.of(meteorites);
+                    Meteorite foundMeteorite = meteoriteStream
+                        .filter(w -> w.getName().equalsIgnoreCase(findMeteorite))
+                        .findFirst()
+                        .orElse(null);
+
+                    if (foundMeteorite == null)
+                    {
+                        System.out.println("No meteorite with that name found.");
+                    }
+                    else 
+                    {
+                        System.out.println(foundMeteorite.display()); //Output info for meteorite.
+                    }
+
                     break;
                 case 5:
                     System.out.println("choice 5");
