@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import com.google.gson.Gson;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 
 public class UserInterface {
     private Meteorite[] meteorites = {};
@@ -105,8 +107,18 @@ public class UserInterface {
                         }
                     }
                     break;
-                case 3:
-                    System.out.println("choice 3");
+                case 3: //Write Meteorite array to a binary file of my choice.
+                    
+                try (ObjectOutputStream out = new ObjectOutputStream(
+                        new FileOutputStream("meteoriteData.dat")))
+                        {
+                        out.writeObject(meteorites);
+                        System.out.println("Data successfully saved to binary file");
+                        }
+                 catch (IOException e)
+                {
+                    System.out.println("Error writing to binary file");
+                }
                     break;
                 case 4:
                     System.out.println("choice 4");

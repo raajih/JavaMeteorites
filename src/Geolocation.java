@@ -1,8 +1,9 @@
 //Raajih Roland
 //Final Project
 import java.util.Arrays;
+import java.io.Serializable;
 
-public class Geolocation {
+public class Geolocation implements Serializable{
     private String type;
     private double[] coordinates;
 

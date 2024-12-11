@@ -1,9 +1,9 @@
 //Raajih Roland
 //Final Project
 
+import java.io.Serializable;
 
-
-public class Meteorite {
+public class Meteorite implements Serializable {
     private String name;
     private String id;
     private String nametype;
