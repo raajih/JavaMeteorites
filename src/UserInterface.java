@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Map;
+import java.util.HashMap;
 
 public class UserInterface {
     private Meteorite[] meteorites = {};
@@ -190,11 +192,60 @@ public class UserInterface {
                         }
                     }
                     break;
-                case 7:
-                    System.out.println("choice 7");
+                case 7: //Display latest meteorites.
+                    System.out.print("How many of the most recent meteorites do you want to see: ");
+                    int numLatest = scnr.nextInt();
+                    scnr.nextLine();
+
+                    if (meteorites.length == 0) //If there is no meteorite objects in array.
+                    System.out.println("No meteorite data loaded. Please add data from file.");
+                    else 
+                    {
+                        //Create list of the latest meteorites.
+                        List<Meteorite> latestMeteorites = Stream.of(meteorites)
+                            .sorted((m1, m2) -> {
+                                // Get the year of each meteorite, default to 0.0 if year is null
+                                double year1 = (m1.getYear() != null) ? Double.parseDouble(m1.getYear().substring(0,4)) : 0.0; //Helps prevent NullPointerException.
+                                double year2 = (m2.getYear() != null) ? Double.parseDouble(m2.getYear().substring(0,4)) : 0.0;
+                                return Double.compare(year2, year1); // Compare in descending order
+                            })
+                            .limit(numLatest)
+                            .collect(Collectors.toList());
+
+                        System.out.println("Latest " + numLatest + " meteorites:");
+                        for (Meteorite meteorite: latestMeteorites)
+                        {
+                            System.out.println(meteorite.display()); //Output latest meteorites.
+                        }
+                    }
+
                     break;
-                case 8:
-                    System.out.println("choice 8");
+                case 8: //Display groups of classifications.
+                if (meteorites.length == 0) 
+                { // If there are no meteorite objects in the array
+                    System.out.println("No meteorite data loaded. Please add data from file.");
+                } else 
+                {
+                    // Group meteorites by classification and count the number of meteorites in each classification.
+                    Map<String, Long> classificationCounts = Stream.of(meteorites)
+                        .collect(Collectors.groupingBy(
+                            w -> w.getRecclass(), // Group by classification.
+                            Collectors.counting()         // Count the number of meteorites in each classification.
+                        ));
+            
+                    // Sort classifications by the number of meteorites in descending order
+                    List<Map.Entry<String, Long>> sortedClassifications = classificationCounts.entrySet()
+                        .stream()
+                        .sorted((entry1, entry2) -> Long.compare(entry2.getValue(), entry1.getValue())) // Sort by count descending
+                        .toList();
+            
+                    // Display results
+                    System.out.println("Meteorite classifications sorted by number of meteorites:");
+                    for (Map.Entry<String, Long> entry : sortedClassifications) 
+                    {
+                        System.out.println("Classification: " + entry.getKey() + ", Count: " + entry.getValue());
+                    }
+                }
                     break;
                 default:
                     System.out.println("Error. Invalid choice");

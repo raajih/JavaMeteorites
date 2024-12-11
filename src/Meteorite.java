@@ -226,8 +226,9 @@ public class Meteorite implements Serializable {
     public String display()
     {
         String result;
+        String yearDisplay = (year != null) ? year.substring(0, 4) : "Unknown Year";
 
-        result = "name = " + name + ", id = " + id + ", recclass = " + recclass + ", mass = " + mass + ", year = " + year.substring(0, 4);
+        result = "name = " + name + ", id = " + id + ", recclass = " + recclass + ", mass = " + mass + ", year = " + yearDisplay;
         return result;
     }
 
